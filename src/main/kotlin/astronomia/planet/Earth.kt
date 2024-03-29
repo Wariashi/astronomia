@@ -22,4 +22,24 @@ object Earth {
     fun getMeanSolarTime(j2000: J2000, longitude: Double): J2000 {
         return J2000(j2000.getValue() - (longitude / 360))
     }
+
+    /**
+     * Calculates the solar mean anomaly for a given date in the [J2000] epoch.
+     *
+     * **Perihelion** is the point in earth's orbit where the earth is closest to the sun.
+     * The **anomaly** is the fraction of the orbit that the earth has passed since it has passed perihelion.
+     * Due to the elliptic orbit of the earth around the sun, the speed is not constant.
+     * The **solar mean anomaly** is the anomaly of a fictitious earth with a constant speed.
+     *
+     * @param j2000 the mean solar time in the [J2000] epoch
+     *
+     * @return the solar mean anomaly in degrees
+     */
+    fun getSolarMeanAnomaly(j2000: J2000): Double {
+        val referenceAnomaly = 357.5291
+        val changePerDay = 0.98560028
+        val days = j2000.getValue()
+        val anomaly = referenceAnomaly + (changePerDay * days)
+        return anomaly % 360
+    }
 }
