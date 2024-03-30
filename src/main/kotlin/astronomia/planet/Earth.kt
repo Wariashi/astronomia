@@ -15,11 +15,12 @@ object Earth : Planet {
      *
      * @return the difference between the solar mean anomaly and the true anomaly
      */
-    fun getEquationOfTheCenterValue(solarMeanAnomaly: Angle): Double {
+    fun getEquationOfTheCenterValue(solarMeanAnomaly: Angle): Angle {
         val anomalyInRadians = solarMeanAnomaly.inRadians()
-        return 1.9148 * sin(anomalyInRadians) +
+        val degrees = 1.9148 * sin(anomalyInRadians) +
                 0.02 * sin(2 * anomalyInRadians) +
                 0.0003 * sin(3 * anomalyInRadians)
+        return Angle.inDegrees(degrees)
     }
 
     /**
