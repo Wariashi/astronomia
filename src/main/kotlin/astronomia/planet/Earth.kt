@@ -3,9 +3,9 @@ package de.wariashi.astronomia.planet
 import de.wariashi.astronomia.calendar.julian.J2000
 
 /**
- * Represents the planet you probably live on.
+ * Represents the [Planet] you probably live on.
  */
-object Earth {
+object Earth : Planet {
     /**
      * Calculates the mean solar time for a given date in the [J2000] epoch at a given longitude.
      *
@@ -21,6 +21,10 @@ object Earth {
      */
     fun getMeanSolarTime(j2000: J2000, longitude: Double): J2000 {
         return J2000(j2000.getValue() - (longitude / 360))
+    }
+
+    override fun getOrbitalEccentricity(): Double {
+        return 0.0167086
     }
 
     /**
