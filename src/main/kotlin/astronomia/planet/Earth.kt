@@ -35,8 +35,8 @@ object Earth : Planet {
      *
      * @return the mean solar time for a given date in the [J2000] epoch at a given longitude
      */
-    fun getMeanSolarTime(j2000: J2000, longitude: Double): J2000 {
-        return J2000(j2000.getValue() - (longitude / 360))
+    fun getMeanSolarTime(j2000: J2000, longitude: Angle): J2000 {
+        return J2000(j2000.getValue() - (longitude.inDegrees() / 360))
     }
 
     override fun getOrbitalEccentricity(): Double {
