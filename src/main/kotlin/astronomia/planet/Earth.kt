@@ -5,7 +5,7 @@ import de.wariashi.astronomia.util.Angle
 import kotlin.math.sin
 
 /**
- * Represents the [Planet] you probably live on.
+ * Represents the third [Planet] from the sun.
  */
 object Earth : Planet {
     /**
