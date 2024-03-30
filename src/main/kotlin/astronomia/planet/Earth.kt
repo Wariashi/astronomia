@@ -1,6 +1,7 @@
 package de.wariashi.astronomia.planet
 
 import de.wariashi.astronomia.calendar.julian.J2000
+import de.wariashi.astronomia.util.Angle
 import kotlin.math.sin
 
 /**
@@ -10,12 +11,12 @@ object Earth : Planet {
     /**
      * Calculates the difference between the solar mean anomaly and the true anomaly.
      *
-     * @param solarMeanAnomaly the solar mean anomaly in degrees
+     * @param solarMeanAnomaly the solar mean anomaly
      *
      * @return the difference between the solar mean anomaly and the true anomaly
      */
-    fun getEquationOfTheCenterValue(solarMeanAnomaly: Double): Double {
-        val anomalyInRadians = Math.toRadians(solarMeanAnomaly)
+    fun getEquationOfTheCenterValue(solarMeanAnomaly: Angle): Double {
+        val anomalyInRadians = solarMeanAnomaly.inRadians()
         return 1.9148 * sin(anomalyInRadians) +
                 0.02 * sin(2 * anomalyInRadians) +
                 0.0003 * sin(3 * anomalyInRadians)
@@ -52,13 +53,13 @@ object Earth : Planet {
      *
      * @param j2000 the mean solar time in the [J2000] epoch
      *
-     * @return the solar mean anomaly in degrees
+     * @return the solar mean anomaly
      */
-    fun getSolarMeanAnomaly(j2000: J2000): Double {
+    fun getSolarMeanAnomaly(j2000: J2000): Angle {
         val referenceAnomaly = 357.5291
         val changePerDay = 0.98560028
         val days = j2000.getValue()
         val anomaly = referenceAnomaly + (changePerDay * days)
-        return anomaly % 360
+        return Angle.inDegrees(anomaly % 360)
     }
 }
