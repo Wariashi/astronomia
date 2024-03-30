@@ -1,11 +1,26 @@
 package de.wariashi.astronomia.planet
 
 import de.wariashi.astronomia.calendar.julian.J2000
+import kotlin.math.sin
 
 /**
  * Represents the [Planet] you probably live on.
  */
 object Earth : Planet {
+    /**
+     * Calculates the difference between the solar mean anomaly and the true anomaly.
+     *
+     * @param solarMeanAnomaly the solar mean anomaly in degrees
+     *
+     * @return the difference between the solar mean anomaly and the true anomaly
+     */
+    fun getEquationOfTheCenterValue(solarMeanAnomaly: Double): Double {
+        val anomalyInRadians = Math.toRadians(solarMeanAnomaly)
+        return 1.9148 * sin(anomalyInRadians) +
+                0.02 * sin(2 * anomalyInRadians) +
+                0.0003 * sin(3 * anomalyInRadians)
+    }
+
     /**
      * Calculates the mean solar time for a given date in the [J2000] epoch at a given longitude.
      *
