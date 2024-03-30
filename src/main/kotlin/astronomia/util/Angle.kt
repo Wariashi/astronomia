@@ -24,6 +24,11 @@ class Angle private constructor(
         return radians
     }
 
+    override fun toString(): String {
+        val radians = Math.toRadians(degrees)
+        return "Angle(degrees=" + degrees + "°, radians=" + radians + "rad)"
+    }
+
     companion object {
         /**
          * Creates an [Angle] in degrees.
