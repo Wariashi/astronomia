@@ -44,26 +44,6 @@ object Earth : Planet {
         return 0.0167086
     }
 
-    /**
-     * Calculates the solar mean anomaly for a given date in the [J2000] epoch.
-     *
-     * **Perihelion** is the point in earth's orbit where the earth is closest to the sun.
-     * The **anomaly** is the fraction of the orbit that the earth has passed since it has passed perihelion.
-     * Due to the elliptic orbit of the earth around the sun, the speed is not constant.
-     * The **solar mean anomaly** is the anomaly of a fictitious earth with a constant speed.
-     *
-     * @param j2000 the mean solar time in the [J2000] epoch
-     *
-     * @return the solar mean anomaly
-     */
-    fun getSolarMeanAnomaly(j2000: J2000): Angle {
-        val referenceAnomaly = getSolarMeanAnomalyAtJ2000().inDegrees()
-        val changePerDay = getSolarMeanAnomalyChangePerDay().inDegrees()
-        val days = j2000.getValue()
-        val anomaly = referenceAnomaly + (changePerDay * days)
-        return Angle.inDegrees(anomaly % 360)
-    }
-
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(357.5291)
     }
