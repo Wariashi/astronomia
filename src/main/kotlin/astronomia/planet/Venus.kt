@@ -13,4 +13,8 @@ object Venus : Planet {
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(50.4161)
     }
+
+    override fun getSolarMeanAnomalyChangePerDay(): Angle {
+        return Angle.inDegrees(1.60213034)
+    }
 }

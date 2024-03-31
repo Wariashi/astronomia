@@ -13,4 +13,8 @@ object Neptune : Planet {
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(256.225)
     }
+
+    override fun getSolarMeanAnomalyChangePerDay(): Angle {
+        return Angle.inDegrees(0.00598103)
+    }
 }

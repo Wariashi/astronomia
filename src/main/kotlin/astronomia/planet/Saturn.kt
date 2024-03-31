@@ -13,4 +13,8 @@ object Saturn : Planet {
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(317.0207)
     }
+
+    override fun getSolarMeanAnomalyChangePerDay(): Angle {
+        return Angle.inDegrees(0.03344414)
+    }
 }

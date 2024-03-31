@@ -13,4 +13,8 @@ object Jupiter : Planet {
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(20.0202)
     }
+
+    override fun getSolarMeanAnomalyChangePerDay(): Angle {
+        return Angle.inDegrees(0.08308529)
+    }
 }

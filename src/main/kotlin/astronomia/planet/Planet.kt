@@ -33,4 +33,16 @@ interface Planet {
      * @return the solar mean anomaly at the beginning of the [J2000] epoch
      */
     fun getSolarMeanAnomalyAtJ2000(): Angle
+
+    /**
+     * Returns the change in solar mean anomaly per day.
+     *
+     * **Perihelion** is the point in a [Planet]'s orbit where the [Planet] is closest to the sun.
+     * The **anomaly** is the fraction of the orbit that the [Planet] has passed since it has passed perihelion.
+     * Due to the elliptic orbit of the [Planet] around the sun, the speed is not constant.
+     * The **solar mean anomaly** is the anomaly of a fictitious [Planet] with a constant speed.
+     *
+     * @return the change in solar mean anomaly per day
+     */
+    fun getSolarMeanAnomalyChangePerDay(): Angle
 }

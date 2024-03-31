@@ -13,4 +13,8 @@ object Mercury : Planet {
     override fun getSolarMeanAnomalyAtJ2000(): Angle {
         return Angle.inDegrees(174.7948)
     }
+
+    override fun getSolarMeanAnomalyChangePerDay(): Angle {
+        return Angle.inDegrees(4.09233445)
+    }
 }
