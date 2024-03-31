@@ -1,12 +1,15 @@
 package de.wariashi.astronomia.planet
 
+import de.wariashi.astronomia.calendar.julian.J2000
+import de.wariashi.astronomia.util.Angle
+
 /**
  * A [Planet] is an astronomical body that meets the following conditions:
  * - It orbits a star.
  * - It is in hydrostatic equilibrium and therefore almost round due to its own gravity.
  * - It has cleared its orbit of other objects.
  */
-fun interface Planet {
+interface Planet {
     /**
      * Returns the orbital eccentricity.
      *
@@ -18,4 +21,16 @@ fun interface Planet {
      * @return the orbital eccentricity
      */
     fun getOrbitalEccentricity(): Double
+
+    /**
+     * Returns the solar mean anomaly at the beginning of the [J2000] epoch.
+     *
+     * **Perihelion** is the point in a [Planet]'s orbit where the [Planet] is closest to the sun.
+     * The **anomaly** is the fraction of the orbit that the [Planet] has passed since it has passed perihelion.
+     * Due to the elliptic orbit of the [Planet] around the sun, the speed is not constant.
+     * The **solar mean anomaly** is the anomaly of a fictitious [Planet] with a constant speed.
+     *
+     * @return the solar mean anomaly at the beginning of the [J2000] epoch
+     */
+    fun getSolarMeanAnomalyAtJ2000(): Angle
 }

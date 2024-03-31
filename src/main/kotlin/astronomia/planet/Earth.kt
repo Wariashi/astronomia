@@ -57,10 +57,14 @@ object Earth : Planet {
      * @return the solar mean anomaly
      */
     fun getSolarMeanAnomaly(j2000: J2000): Angle {
-        val referenceAnomaly = 357.5291
+        val referenceAnomaly = getSolarMeanAnomalyAtJ2000().inDegrees()
         val changePerDay = 0.98560028
         val days = j2000.getValue()
         val anomaly = referenceAnomaly + (changePerDay * days)
         return Angle.inDegrees(anomaly % 360)
+    }
+
+    override fun getSolarMeanAnomalyAtJ2000(): Angle {
+        return Angle.inDegrees(357.5291)
     }
 }
