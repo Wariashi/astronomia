@@ -1,6 +1,6 @@
 package de.wariashi.astronomia.planet
 
-import de.wariashi.astronomia.calendar.julian.J2000
+import de.wariashi.astronomia.calendar.julian.JulianDate
 import de.wariashi.astronomia.util.Angle
 import kotlin.math.sin
 
@@ -24,20 +24,21 @@ object Earth : Planet {
     }
 
     /**
-     * Calculates the mean solar time for a given date in the [J2000] epoch at a given longitude.
+     * Calculates the mean solar time for a given [JulianDate] at a given longitude.
      *
      * A **solar day** is the time it takes from noon to noon.
      * The **apparent solar time** is the westward hour angle of the sun with 0° at noon and 180° at midnight.
      * Due to the elliptic orbit of the earth around the sun, the angular velocity is not constant.
      * The **mean solar time** is the hour angle of a fictitious sun with a constant angular velocity.
      *
-     * @param j2000 the date in the [J2000] epoch
+     * @param julianDate the date
      * @param longitude the longitude of the observer on earth
      *
-     * @return the mean solar time for a given date in the [J2000] epoch at a given longitude
+     * @return the mean solar time for a given [JulianDate] at a given longitude
      */
-    fun getMeanSolarTime(j2000: J2000, longitude: Angle): J2000 {
-        return J2000(j2000.getValue() - (longitude.inDegrees() / 360))
+    fun getMeanSolarTime(julianDate: JulianDate, longitude: Angle): JulianDate {
+        val valueAtJ2000 = julianDate.getValueForJ2000() - (longitude.inDegrees() / 360)
+        return JulianDate.ofJ2000(valueAtJ2000)
     }
 
     override fun getOrbitalEccentricity(): Double {

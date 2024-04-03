@@ -1,6 +1,6 @@
 package de.wariashi.astronomia.planet
 
-import de.wariashi.astronomia.calendar.julian.J2000
+import de.wariashi.astronomia.calendar.julian.JulianDate
 import de.wariashi.astronomia.util.Angle
 
 /**
@@ -23,34 +23,34 @@ interface Planet {
     fun getOrbitalEccentricity(): Double
 
     /**
-     * Calculates the solar mean anomaly for a given date in the [J2000] epoch.
+     * Calculates the solar mean anomaly for a given [JulianDate].
      *
      * **Perihelion** is the point in a [Planet]'s orbit where the [Planet] is closest to the sun.
      * The **anomaly** is the fraction of the orbit that the [Planet] has passed since it has passed perihelion.
      * Due to the elliptic orbit of the [Planet] around the sun, the speed is not constant.
      * The **solar mean anomaly** is the anomaly of a fictitious [Planet] with a constant speed.
      *
-     * @param j2000 the date to calculate the solar mean anomaly for
+     * @param julianDate the date to calculate the solar mean anomaly for
      *
      * @return the solar mean anomaly
      */
-    fun getSolarMeanAnomaly(j2000: J2000): Angle {
+    fun getSolarMeanAnomaly(julianDate: JulianDate): Angle {
         val anomalyAtJ2000 = getSolarMeanAnomalyAtJ2000().inDegrees()
         val changePerDay = getSolarMeanAnomalyChangePerDay().inDegrees()
-        val days = j2000.getValue()
+        val days = julianDate.getValueForJ2000()
         val anomaly = anomalyAtJ2000 + (changePerDay * days)
         return Angle.inDegrees(anomaly % 360)
     }
 
     /**
-     * Returns the solar mean anomaly at the beginning of the [J2000] epoch.
+     * Returns the solar mean anomaly at the beginning of the J2000 epoch.
      *
      * **Perihelion** is the point in a [Planet]'s orbit where the [Planet] is closest to the sun.
      * The **anomaly** is the fraction of the orbit that the [Planet] has passed since it has passed perihelion.
      * Due to the elliptic orbit of the [Planet] around the sun, the speed is not constant.
      * The **solar mean anomaly** is the anomaly of a fictitious [Planet] with a constant speed.
      *
-     * @return the solar mean anomaly at the beginning of the [J2000] epoch
+     * @return the solar mean anomaly at the beginning of the J2000 epoch
      */
     fun getSolarMeanAnomalyAtJ2000(): Angle
 
