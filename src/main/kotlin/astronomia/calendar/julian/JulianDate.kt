@@ -18,6 +18,13 @@ class JulianDate(private val value: Double) {
     }
 
     /**
+     * @return the number of days that have passed since November 17, 1858, 0:00 UTC in the Gregorian calendar
+     */
+    fun getValueForModifiedJulianDate(): Double {
+        return value + OFFSET_TO_MODIFIED_JULIAN_DATE
+    }
+
+    /**
      * Creates a [J2000] which corresponds to this [JulianDate].
      *
      * @return a corresponding [J2000]
@@ -26,29 +33,25 @@ class JulianDate(private val value: Double) {
         return J2000(value + J2000.OFFSET_TO_JULIAN_DATE)
     }
 
-    /**
-     * Creates a [ModifiedJulianDate] which corresponds to this [JulianDate].
-     *
-     * @return a corresponding [ModifiedJulianDate]
-     */
-    fun toModifiedJulianDate(): ModifiedJulianDate {
-        return ModifiedJulianDate(value + ModifiedJulianDate.OFFSET_TO_JULIAN_DATE)
-    }
-
     override fun toString(): String {
         return value.toString()
     }
 
     companion object {
         /**
-         * The reference epoch, meaning that the [JulianDate] `0.0` corresponds to this date in the Gregorian calendar.
-         */
-        private val referenceEpoch = LocalDateTime.of(-4713, 11, 24, 12, 0).atOffset(ZoneOffset.UTC).toInstant()
-
-        /**
          * The number of milliseconds in a day.
          */
         private const val MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1_000
+
+        /**
+         * The offset between a [JulianDate] and the corresponding Modified Julian Date.
+         */
+        private const val OFFSET_TO_MODIFIED_JULIAN_DATE = -2_400_000.5
+
+        /**
+         * The reference epoch, meaning that the [JulianDate] `0.0` corresponds to this date in the Gregorian calendar.
+         */
+        private val referenceEpoch = LocalDateTime.of(-4713, 11, 24, 12, 0).atOffset(ZoneOffset.UTC).toInstant()
 
         /**
          * Creates a [JulianDate] representing the current time.
@@ -74,6 +77,17 @@ class JulianDate(private val value: Double) {
             val julianDay = differenceInMilliseconds.toDouble() / MILLISECONDS_PER_DAY.toDouble()
 
             return JulianDate(julianDay)
+        }
+
+        /**
+         * Creates a [JulianDate] based on a Modified Julian Date.
+         *
+         * @param modifiedJulianDate the time reference for creating the [JulianDate]
+         *
+         * @return a [JulianDate] based on the Modified Julian Date
+         */
+        fun ofModifiedJulianDate(modifiedJulianDate: Double): JulianDate {
+            return JulianDate(modifiedJulianDate - OFFSET_TO_MODIFIED_JULIAN_DATE)
         }
     }
 }

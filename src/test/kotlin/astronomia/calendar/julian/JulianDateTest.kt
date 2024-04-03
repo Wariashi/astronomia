@@ -13,4 +13,11 @@ internal class JulianDateTest {
         val date = JulianDate.of(referenceEpoch)
         Assertions.assertEquals(0.0, date.getValue())
     }
+
+    @Test
+    fun testReferenceEpochForModifiedJulianDate() {
+        val referenceEpoch = LocalDateTime.of(1858, 11, 17, 0, 0).atZone(ZoneOffset.UTC).toInstant()
+        val date = JulianDate.of(referenceEpoch)
+        Assertions.assertEquals(0.0, date.getValueForModifiedJulianDate())
+    }
 }
