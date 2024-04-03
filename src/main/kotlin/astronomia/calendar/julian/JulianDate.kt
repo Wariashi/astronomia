@@ -32,7 +32,7 @@ class JulianDate(private val value: Double) {
     }
 
     override fun toString(): String {
-        return value.toString()
+        return "JulianDate(inJ2000=" + getValueForJ2000() + ", value=" + value + ")"
     }
 
     companion object {
