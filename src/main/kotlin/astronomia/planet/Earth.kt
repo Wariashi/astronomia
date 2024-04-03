@@ -9,9 +9,29 @@ import kotlin.math.sin
  */
 object Earth : Planet {
     /**
+     * Calculates the (geocentric) ecliptic longitude.
+     *
+     * The **ecliptic** is the plane that the sun seems to be moving in within a year.
+     * (In other words: The plane that the orbit of earth lies in.)
+     * The **vernal equinox** is the point in the ecliptic where the sun is directly above the equator in spring.
+     * The **ecliptic longitude** is the angle between the vernal equinox and the sun along the ecliptic.
+     *
+     * @param solarMeanAnomaly the solar mean anomaly (see [Planet.getSolarMeanAnomaly])
+     *
+     * @return the (geocentric) ecliptic longitude
+     */
+    fun getEclipticLongitude(solarMeanAnomaly: Angle): Angle {
+        val anomaly = solarMeanAnomaly.inDegrees()
+        val equationValue = getEquationOfTheCenterValue(solarMeanAnomaly).inDegrees()
+        val longitudeOfPerihelion = 102.94719
+        val eclipticLongitude = (anomaly + equationValue + longitudeOfPerihelion + 180.0) % 360
+        return Angle.inDegrees(eclipticLongitude)
+    }
+
+    /**
      * Calculates the difference between the solar mean anomaly and the true anomaly.
      *
-     * @param solarMeanAnomaly the solar mean anomaly
+     * @param solarMeanAnomaly the solar mean anomaly (see [Planet.getSolarMeanAnomaly])
      *
      * @return the difference between the solar mean anomaly and the true anomaly
      */
